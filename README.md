@@ -310,3 +310,116 @@ render() {
   }
 ...
 ```
+
+Nếu muốn display button Login, thì code sẽ như sau:
+
+
+```
+// index.js
+...
+return (
+      <div className="App">
+        <h1>
+          This is a Demo showing several ways to implement Conditional Rendering
+          in React.
+        </h1>
+        {isLoggedIn && <button>Logout</button>}
+        {!isLoggedIn && <button>Login</button>}
+      </div>
+    );
+  }
+...
+```
+
+## 6. Sử dụng Immediately Invoked Function Expressions(IIFEs)
+
+Để sử dụng được, bạn cần nghiên cứu qua [https://developer.mozilla.org/en-US/docs/Glossary/IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)
+
+Nhưng code có thể tóm tắt lại như sau:
+
+```
+//index.js
+...
+render() {
+    let { isLoggedIn } = this.state;
+    return (
+      <div className="App">
+        <h1>
+          This is a Demo showing several ways to implement Conditional Rendering
+          in React.
+        </h1>
+        {(function() {
+          if (isLoggedIn) {
+            return <button>Logout</button>;
+          } else {
+            return <button>Login</button>;
+          }
+        })()}
+      </div>
+    );
+  }
+...
+```
+
+Có thể được viết ngắn gọn lại như sau:
+
+```
+// index.js
+...
+return (
+      <div className="App">
+        <h1>
+          This is a Demo showing several ways to implement Conditional Rendering
+          in React.
+        </h1>
+        {(()=> {
+          if (isLoggedIn) {
+            return <button>Logout</button>;
+          } else {
+            return <button>Login</button>;
+          }
+        })()}
+      </div>
+    );
+  }
+...
+
+```
+
+
+## 7. Using Enhanced JSX
+
+```
+// index.js
+...
+return (
+      <div className="App">
+        <h1>
+          This is a Demo showing several ways to implement Conditional Rendering
+          in React.
+        </h1>
+        <Choose>
+          <When condition={isLoggedIn}>
+             <button>Logout</button>;
+          </When>
+          <When condition={!isLoggedIn}>
+             <button>Login</button>;
+          </When>
+        </Choose>
+      </div>
+    );
+  }
+...
+```
+
+### Performance
+
+Theo nguyên tắc chung, khi sử dụng kiểm tra điều kiện bạn không nên làm 1 số điều sau:
+
+- K nên tự ý thay đổi vị trí của các component
+
+- Chỉ thay đổi markup liên quan tới kiểm tra điều kiện
+
+- Không mở rộng component 1 cách không cần thiết
+
+
